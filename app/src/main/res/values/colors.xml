@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="theme">#FF639F70</color>
-    <color name="background_day">#FFF5F5F5</color>
-    <color name="background_night">#FF2D2D2D</color>
+    <!-- The iconic Roblox Top Header Blue -->
+    <color name="roblox_header_blue">#19478A</color>
+    <color name="roblox_header_blue_dark">#113262</color>
+    
+    <!-- The dark gray sub-navigation bar -->
+    <color name="roblox_sub_nav_gray">#333333</color>
+    
+    <!-- Page backgrounds and accents -->
+    <color name="roblox_page_bg">#E1E1E1</color>
+    <color name="roblox_card_bg">#FFFFFF</color>
+    <color name="roblox_text_dark">#222222</color>
+    <color name="roblox_text_light">#FFFFFF</color>
+    
+    <!-- Classic Green 'Play' button color for interacting with files -->
+    <color name="roblox_button_green">#00A200</color>
 </resources>
