@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/roblox_page_bg">
+
+    <!-- 1. THE CLASSIC BLUE HEADER BAR -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/roblox_header_blue"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+
+        <!-- Era-appropriate Text Logo -->
+        <TextView
+            android:id="@+id/roblox_logo_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="bloxfunn"
+            android:textColor="@color/roblox_text_light"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-black"
+            android:letterSpacing="0.05" />
+
+        <!-- Status Tag / Mode Banner -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/roblox_logo_text"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="#A20000"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="go connect to your WiFi blud"
+            android:textColor="@color/roblox_text_light"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <!-- Hardware/Connection Notification Indicator right aligned -->
+        <TextView
+            android:id="@+id/connection_warning_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="Wee-Fee Disconnected"
+            android:textColor="#FFCC00"
+            android:textStyle="bold"
+            android:textSize="13sp" />
+    </RelativeLayout>
+
+    <!-- 2. DARK CHARCOAL SUB-NAV BAR -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:background="@color/roblox_sub_nav_gray"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Local Fool Browser"
+            android:textColor="@color/roblox_text_light"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:paddingRight="20dp" />
+            
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#555555"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp" />
+    </LinearLayout>
+
+    <!-- 3. MAIN CONTENT CONTAINER (Asset/File Selection Area) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Placey Place place ;)"
+            android:textColor="@color/roblox_text_dark"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- White card content container background matching old site frames -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/roblox_card_bg"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- The list view dynamically populated by your local directories -->
+            <ListView
+                android:id="@+id/offline_file_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="#E1E1E1"
+                android:dividerHeight="1dp"
+                android:scrollbars="vertical" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
