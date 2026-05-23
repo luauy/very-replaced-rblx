@@ -1,5 +1,6 @@
 
 # BloxFun
+![Dynamic YAML Badge](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fgithub.com%2Fluauy%2Fvery-replaced-rblx%2Fblob%2F2c5ab92c38af8b42f68c2447afad4101cbaa688e%2F.github%2Fworkflows%2Fandroid.yml&prefix=Working%3F%20&suffix=is%20it%20working%20yet%3F%20&style=social&logo=github)
 
 A release of 2011-2015 [![Play on Roblox](https://shields.io/roblox-website&style=plastic&icon=roblox)](https://roblox.com)
  Trying to Mimic PC Features;
