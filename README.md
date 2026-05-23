@@ -1,9 +1,11 @@
 
-# Project Title
+# BloxFun
 
-A brief description of what this project does and who it's for
-
-
+A release of 2011-2015 ![Roblox](https://roblox.com/) Trying to Mimic PC Features;
+```
++ Studio Mobile (SL Without API Key)
++ Now With Actual Chat (since Roblox Desperately begged AI Age Verification) 
+```
 ## Installation
 
 Install Bloxfun Via the Releases
