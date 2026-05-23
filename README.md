@@ -1,7 +1,8 @@
 
 # BloxFun
 
-A release of 2011-2015 ![Roblox](https://roblox.com/) Trying to Mimic PC Features;
+A release of 2011-2015 [![Play on Roblox](https://shields.io)](https://roblox.com)
+ Trying to Mimic PC Features;
 ```
 + Studio Mobile (SL Without API Key)
 + Now With Actual Chat (since Roblox Desperately begged AI Age Verification) 
