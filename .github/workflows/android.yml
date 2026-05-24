@@ -1,26 +1,95 @@
-name: Android CI
+name: Android Hybrid CI Auto-Release
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+
+permissions:
+  contents: write
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: set up JDK 11
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    # 1. SET UP PYTHON ENVIRONMENT (Since the core logic is here)
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-numeric-version: '3.11'
+        cache: 'pip' # Speeds up builds by caching your pip requirements
+
+    # 2. INSTALL PYTHON DEPENDENCIES
+    # Installs your build tool (e.g., briefcase, python-for-android, buildozer) 
+    # and any app requirements.
+    - name: Install Python Build Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        # If using a specific compiler toolkit like briefcase or buildozer, uncomment below:
+        # pip install briefcase
+
+    # 3. SET UP JAVA ENGINE FOR THE KOTLIN LAYER
+    - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
-        java-version: '11'
+        java-version: '17'
         distribution: 'temurin'
         cache: gradle
 
-    - name: Grant execute permission for gradlew
+    - name: Grant Execute Permission for Gradle Wrapper
       run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
+
+    # 4. RUN COMPILATION
+    # This step runs your Python packaging tool or invokes the Gradle task 
+    # that links your Python script engine into the native Kotlin components.
+    - name: Compile Hybrid Android App
+      run: |
+        # Option A: If your Python engine generates the build via Gradle:
+        ./gradlew assembleDebug --no-daemon
+        
+        # Option B: If you use a framework command to pack the Python/Kotlin hybrid, swap it here:
+        # briefcase package android --no-input
+
+    # 5. PACK PRISTINE TAR.GZ DEVELOPER SOURCE
+    - name: Prepare Clean Release Assets
+      run: |
+        mkdir -p release-assets
+        
+        # Copy the final compiled launcher APK
+        cp app/build/outputs/apk/debug/app-debug.apk release-assets/bloxfun-launcher-latest.apk
+        
+        # Pack source files (keeping Python scripts and Kotlin code, dropping build junk)
+        tar --exclude='./.git' \
+            --exclude='./.gradle' \
+            --exclude='./app/build' \
+            --exclude='./.idea' \
+            --exclude='./__pycache__' \
+            --exclude='./.pytest_cache' \
+            --exclude='./release-assets' \
+            -czf release-assets/bloxfun-src-latest.tar.gz .
+
+    # 6. DEPLOY BOTH ASSETS DIRECTLY TO GITHUB RELEASES
+    - name: Deploy to GitHub Releases Page
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: "latest-dev"
+        name: "Bloxfun Rolling Sandbox Build"
+        body: |
+          ### Automated Hybrid Rolling Build
+          This release contains the absolute latest compiled code pushed directly from the workspace.
+          
+          * **Compiled APK:** Download `bloxfun-launcher-latest.apk` to run the Python/Kotlin environment on your device.
+          * **Pristine Source Tarball:** Download `bloxfun-src-latest.tar.gz` below for the full uncompiled project stack.
+          
+          _Updated dynamically on every commit._
+        draft: false
+        prerelease: true
+        files: |
+          release-assets/bloxfun-launcher-latest.apk
+          release-assets/bloxfun-src-latest.tar.gz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
